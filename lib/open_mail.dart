@@ -171,10 +171,8 @@ class OpenMail {
         String? launchScheme =
             installedApps.first.composeLaunchScheme(emailContent);
         if (launchScheme != null) {
-          result = await launch(
-            launchScheme,
-            forceSafariVC: false,
-          );
+          result = await launchUrl(Uri.parse(launchScheme),
+              mode: LaunchMode.externalNonBrowserApplication);
         }
         return OpenMailAppResult(didOpen: result);
       } else {
@@ -210,10 +208,8 @@ class OpenMail {
     } else if (_isIOS) {
       String? launchScheme = mailApp.composeLaunchScheme(emailContent);
       if (launchScheme != null) {
-        return await launch(
-          launchScheme,
-          forceSafariVC: false,
-        );
+        return await launchUrl(Uri.parse(launchScheme),
+            mode: LaunchMode.externalNonBrowserApplication);
       }
 
       return false;

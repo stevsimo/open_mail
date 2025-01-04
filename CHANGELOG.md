@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.7] - 2025-01-04
+
+### Fix and Improve Documentation
+- Fix some deprecated dependency and update documentaiton.
+
 ## [0.0.6] - 2025-01-04
 
 ### Improvement
