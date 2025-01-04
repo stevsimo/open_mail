@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.6] - 2025-01-04
+
+### Improvement
+- Downgrade platform version from 3.1.6 to 3.1.0 to remove conflict dependecies.
+
 ## [0.0.5] - 2024-11-19
 ### Added
 - Improved documentation for better clarity on package usage.
