@@ -139,7 +139,7 @@ class OpenMail {
         return OpenMailAppResult(didOpen: false, options: apps);
       }
     } else {
-      throw UnsupportedError('Platform not supported');
+      throw Exception('Platform not supported');
     }
   }
 
@@ -168,11 +168,11 @@ class OpenMail {
       List<MailApp> installedApps = await _getIosMailApps();
       if (installedApps.length == 1) {
         bool result = false;
-        String? launchScheme =
-            installedApps.first.composeLaunchScheme(emailContent);
+        String? launchScheme = installedApps.first.composeLaunchScheme(emailContent);
         if (launchScheme != null) {
-          result = await launchUrl(Uri.parse(launchScheme),
-              mode: LaunchMode.externalNonBrowserApplication);
+          result = await launchUrl(
+            Uri.parse(launchScheme),
+          );
         }
         return OpenMailAppResult(didOpen: result);
       } else {
@@ -181,7 +181,7 @@ class OpenMail {
         return OpenMailAppResult(didOpen: false, options: installedApps);
       }
     } else {
-      throw UnsupportedError('Platform currently not supported.');
+      throw Exception('Platform currently not supported.');
     }
   }
 
@@ -208,13 +208,14 @@ class OpenMail {
     } else if (_isIOS) {
       String? launchScheme = mailApp.composeLaunchScheme(emailContent);
       if (launchScheme != null) {
-        return await launchUrl(Uri.parse(launchScheme),
-            mode: LaunchMode.externalNonBrowserApplication);
+        return await launchUrl(
+          Uri.parse(launchScheme),
+        );
       }
 
       return false;
     } else {
-      throw UnsupportedError('Platform currently not supported');
+      throw Exception('Platform currently not supported');
     }
   }
 
@@ -233,7 +234,7 @@ class OpenMail {
         Uri.parse(mailApp.iosLaunchScheme),
       );
     } else {
-      throw UnsupportedError('Platform not supported');
+      throw Exception('Platform not supported');
     }
   }
 
@@ -246,7 +247,7 @@ class OpenMail {
     } else if (_isIOS) {
       return await _getIosMailApps();
     } else {
-      throw UnsupportedError('Platform not supported');
+      throw Exception('Platform not supported');
     }
   }
 
@@ -267,8 +268,7 @@ class OpenMail {
   static Future<List<MailApp>> _getIosMailApps() async {
     var installedApps = <MailApp>[];
     for (var app in _supportedMailApps) {
-      if (await canLaunchUrl(Uri.parse(app.iosLaunchScheme)) &&
-          !_filterList.contains(app.name.toLowerCase())) {
+      if (await canLaunchUrl(Uri.parse(app.iosLaunchScheme)) && !_filterList.contains(app.name.toLowerCase())) {
         installedApps.add(app);
       }
     }
@@ -453,8 +453,7 @@ class EmailContent {
   final List<String> bcc;
   final String _subject;
 
-  String get subject =>
-      OpenMail._isIOS ? Uri.encodeComponent(_subject) : _subject;
+  String get subject => OpenMail._isIOS ? Uri.encodeComponent(_subject) : _subject;
   final String _body;
 
   String get body => OpenMail._isIOS ? Uri.encodeComponent(_body) : _body;
